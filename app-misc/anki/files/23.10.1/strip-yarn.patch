@@ -1,0 +1,30 @@
+yarn install` and the lifecycle scripts of some packages require network
+access.
+The vendored node_modules directory provides a functional testing suite
+as compared to `yarn install --offline --ignore-scripts`.
+
+Author: Lucio Sauer <watermanpaint@posteo.net>
+--- a/build/runner/src/yarn.rs
++++ b/build/runner/src/yarn.rs
+@@ -2,12 +2,8 @@
+ // License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
+ 
+ use std::path::Path;
+-use std::process::Command;
+-
+ use clap::Args;
+ 
+-use crate::run::run_command;
+-
+ #[derive(Args)]
+ pub struct YarnArgs {
+     yarn_bin: String,
+@@ -17,8 +13,6 @@ pub struct YarnArgs {
+ pub fn setup_yarn(args: YarnArgs) {
+     link_node_modules();
+ 
+-    run_command(Command::new(&args.yarn_bin).arg("install"));
+-
+     std::fs::write(args.stamp, b"").unwrap();
+ }
+ 

@@ -1,0 +1,16 @@
+Updates should be managed by Portage.
+
+Author: Lucio Sauer <watermanpaint@posteo.net>
+--- a/qt/aqt/main.py
++++ b/qt/aqt/main.py
+@@ -1421,9 +1421,7 @@ title="{}" {}>{}</button>""".format(
+     ##########################################################################
+ 
+     def setup_auto_update(self, _log: list[DownloadLogEntry]) -> None:
+-        from aqt.update import check_for_update
+-
+-        check_for_update()
++        return
+ 
+     # Timers
+     ##########################################################################
